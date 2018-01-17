@@ -39,11 +39,11 @@ public class FileStructure {
         char prefix1 = last ? '└' : '├';
         char prefix2 = files == null || files.length == 0 ? '─' : '┬';
 
-        System.out.printf("%s%c%c╼ %s\n", prefix0, prefix1, prefix2, f);
+        System.out.printf("%s%c─%c╼ %s\n", prefix0, prefix1, prefix2, f);
 
         if (files != null) {
             for (int i = 0; i < files.length; i++) {
-                char next = last? ' ' : '│';
+                String next = last? "  " : "│ ";
                 if (i == files.length - 1) {
                     printDirsHelper(files[i], prefix0 + next, true);
                 } else {
