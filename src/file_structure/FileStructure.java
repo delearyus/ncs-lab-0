@@ -22,18 +22,10 @@ public class FileStructure {
             return;  // give up, go home
         }
 
-        printDirs(fc.getSelectedFile());
+        printDirs(fc.getSelectedFile(),"",true);
     }
 
-    private void printDirs(File f) {
-        // we need to keep track of the depth of the recursion for pretty
-        // printing, but we don't want to expose this functionality as part of
-        // the printDirs() function, and we don't want to force someone calling
-        // this function to provide a 0 every time.
-        printDirsHelper(f,"",true);
-    }
-
-    private void printDirsHelper(File f, String prefix0, boolean last) {
+    private void printDirs(File f, String prefix0, boolean last) {
         File[] files = f.listFiles();
 
         char prefix1 = last ? '└' : '├';
@@ -45,9 +37,9 @@ public class FileStructure {
             for (int i = 0; i < files.length; i++) {
                 String next = last? "  " : "│ ";
                 if (i == files.length - 1) {
-                    printDirsHelper(files[i], prefix0 + next, true);
+                    printDirs(files[i], prefix0 + next, true);
                 } else {
-                    printDirsHelper(files[i], prefix0 + next, false);
+                    printDirs(files[i], prefix0 + next, false);
                 }
             }
         }
